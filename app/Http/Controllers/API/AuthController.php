@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+use function Laravel\Prompts\error;
+
 class AuthController extends Controller
 {
     public function register(Request $request){
@@ -20,10 +22,10 @@ class AuthController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'success'=>false,
+                'status'=>'error',
                 'message' => 'failed',
                 'data' => $validator->errors(),
-            ]);
+            ],401);
         }
 
         $input = $request->all();
@@ -35,7 +37,7 @@ class AuthController extends Controller
 
 
         return response()->json([
-            'success'=>true,
+            'status'=>'success',
             'message' => 'success register',
             'data' => $success,
         ]);
@@ -52,16 +54,25 @@ class AuthController extends Controller
             $success['email'] = $auth->email;
 
             return response()->json([
-                'success' => true,
-                'message' => 'Login sukses',
+                'status' => 'success',
+                'message' => 'Login success',
                 'data' => $success
-            ]);
+            ],200);
         } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Cek email dan password lagi',
+            return response()->json( [
+                'status' => 'error',
+                'message' => _('wrong email and password'),
                 'data' => null
-            ]);
+            ],422);
         }
+    }
+
+    public function getUser(Request $request){
+
+        return response()->json([
+            'status' => 'success',
+            'message' => _('success'),
+            'data' => $request->user()
+        ]);
     }
 }
