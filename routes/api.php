@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ItemFuelController;
+use App\Http\Controllers\OrderFuelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -25,6 +26,11 @@ Route::post('register',[AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('itemFuels',[ItemFuelController::class,'index']);
+    Route::post('create-fuel',[ItemFuelController::class, 'createFuel']);
     Route::get('user',[AuthController::class, 'getUser']);
+
+
+    Route::post('create-order',[OrderFuelController::class, 'createOrder']);
+
 
 });
