@@ -25,12 +25,14 @@ Route::post('login',[AuthController::class, 'login']);
 Route::post('register',[AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('itemFuels',[ItemFuelController::class,'index']);
+    Route::get('item-fuels',[ItemFuelController::class,'index']);
     Route::post('create-fuel',[ItemFuelController::class, 'createFuel']);
     Route::get('user',[AuthController::class, 'getUser']);
 
 
     Route::post('create-order',[OrderFuelController::class, 'createOrder']);
+    Route::get('detail-order',[OrderFuelController::class, 'myOrder']);
+    Route::get('my-order',[OrderFuelController::class,'indexMyOrder']);
 
 
 });

@@ -5,20 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemFuel extends Model
+class OrderFuel extends Model
 {
     use HasFactory;
 
+    protected $table = 'order_fuel';
 
-    protected $table = 'item_fuels';
-
-    protected $primarykey = 'id';
+    protected $guarded = [];
 
     public $incrementing = false;
-
-    protected $guarded = [
-
-    ];
 
 
     protected $hidden = [

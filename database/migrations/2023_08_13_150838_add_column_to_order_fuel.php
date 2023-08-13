@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_fuels', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('description');
-            $table->integer('price');
-            $table->integer('number_oktan');
-            $table->timestamps();
+        Schema::table('order_fuel', function (Blueprint $table) {
+            $table->integer('shipping_cost');
+            //
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_fuels');
+        Schema::table('order_fuel', function (Blueprint $table) {
+            //
+        });
     }
 };
