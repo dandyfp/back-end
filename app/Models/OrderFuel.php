@@ -15,9 +15,14 @@ class OrderFuel extends Model
 
     public $incrementing = false;
 
+    public function orderFuels()
+{
+    return $this->hasMany(OrderFuel::class);
+}
+
 
     protected $hidden = [
-        'created_at',
+       // 'created_at',
         'updated_at',
     ];
 

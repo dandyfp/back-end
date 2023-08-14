@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ItemFuelController;
 use App\Http\Controllers\OrderFuelController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -34,5 +35,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('detail-order',[OrderFuelController::class, 'myOrder']);
     Route::get('my-order',[OrderFuelController::class,'indexMyOrder']);
 
+
+    Route::post('create-transaction',[TransactionController::class, 'createTransaction']);
+    Route::get('my-transaction',[TransactionController::class,'indexTransactions']);
 
 });

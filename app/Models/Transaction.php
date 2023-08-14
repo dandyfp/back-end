@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+
+    protected $table = 'transaction';
+
+    protected $guarded = [];
+
+    public $incrementing = false;
+
+   /*  public function orderFuels()
+    {
+        return $this->hasMany(OrderFuel::class,'id','id_order');
+    } */
+
 }
