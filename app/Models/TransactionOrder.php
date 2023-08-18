@@ -6,25 +6,23 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemFuel extends Model
+class TransactionOrder extends Model
 {
     use HasFactory;
+    use HasUuids;
 
 
-    protected $table = 'item_fuels';
+    protected $table = 'transaction_order';
 
-    protected $primarykey = 'id';
+    protected $guarded = [];
 
     public $incrementing = false;
 
-    protected $guarded = [
 
-    ];
+     public function orderFuels()
+    {
+        return $this->hasMany(OrderFuel::class,'order_id','id');
+    }
 
-
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
 
 }

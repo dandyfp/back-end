@@ -36,7 +36,7 @@ class OrderFuelController extends Controller
         }
 
         $idFuel = $request->query('id_fuel');
-        $idUser = $request->query('id_user');
+        $idUser = $request->query('user_id');
         $nameFuel = ItemFuel::where('id',$idFuel)->first();
 
 
@@ -45,7 +45,7 @@ class OrderFuelController extends Controller
         $input['name_fuel'] = $nameFuel->name;
         $input['number_oktan']=$nameFuel->number_oktan;
         $input['id_fuel'] = $idFuel;
-        $input['id_user'] = $idUser;
+        $input['user_id'] = $idUser;
         $input['shipping_cost'] = 5000;
 
         $input['full_address'] = $request->input('detail_address') . ', ' . $request->input('subdistrict') . ', ' . $request->input('city') . ', ' . $request->input('province');
@@ -62,7 +62,11 @@ class OrderFuelController extends Controller
     }
 
     public function indexMyOrder(){
-        $myOrder = OrderFuel::all();
+
+        $user = auth()->user(); // Mendapatkan informasi pengguna yang sedang masuk
+        $myOrder = $user->orders; // Mengambil pesanan berdasarkan relasi
+
+        //$myOrder = OrderFuel::all();
         return response()->json([
             'data' => $myOrder,
         ]);

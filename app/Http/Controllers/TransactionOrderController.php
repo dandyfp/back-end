@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ItemFuel;
-use App\Models\OrderFuel;
 use App\Models\Transaction;
+use App\Models\TransactionOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-
-class TransactionController extends Controller
+class TransactionOrderController extends Controller
 {
-    public function createTransaction(Request $request){
+    public function indexTransactionsOrder($idOrder){
+        $transaction = TransactionOrder::where('id_order', $idOrder)->with('orderFuels')->firstOrFail();
+
+        return response()->json([
+            'data' => $transaction
+        ]);
+    }
+
+    public function createTransactionOrder(Request $request){
         $validator = Validator::make($request->all(),[
-            'user_id' => 'required',
+            'id_user' => 'required',
             'id_order' => 'required',
             'id_fuel' => 'required',
-            'type_transaction',
+            'trype_transaction',
             'transaction_payment_method' => 'required',
             'amount' => 'required',
             'date'=>'required',
-            'status' => 'required',
         ]);
 
         if($validator->fails()){
@@ -33,17 +37,9 @@ class TransactionController extends Controller
         }
        // $fuel = ItemFuel::where('id')->first();
 
-
-       $order = OrderFuel::findOrFail($request->id_order);
-       $data = $request->only('status');
-       $order->update($data);
-
-
         $input = $request->all();
-        $input['id'] = Str::uuid()->toString();
+       // $input['id'] = Str::uuid()->toString();
         //$input['name_fuel'] = $fuel->name_fuel;
-
-
         Transaction::create($input);
 
 
@@ -55,18 +51,5 @@ class TransactionController extends Controller
 
 
 
-    }
-
-
-    public function indexTransactions(){
-        $user = auth()->user(); // Mendapatkan informasi pengguna yang sedang masuk
-        $myTransaction = $user->transaction; // Mengambil pesanan berdasarkan relasi
-
-        $transaction = Transaction::all();
-
-
-        return response()->json([
-            'data' => $myTransaction
-        ]);
     }
 }

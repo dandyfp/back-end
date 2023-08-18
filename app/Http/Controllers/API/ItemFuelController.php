@@ -48,4 +48,46 @@ class ItemFuelController extends Controller
         ]);
 
     }
+
+    public function updateFuel(Request $request, $id){
+        $fuel = ItemFuel::findOrFail($id);
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'number_oktan' => 'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>'error',
+                'message' => 'failed',
+                'data' => $validator->errors(),
+            ],500);
+        }
+
+        $fuel->update($request->all());
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil update',
+            'data' => $fuel,
+        ],200);
+    }
+
+
+    public function deleteFuel($id){
+        $fuel = ItemFuel::findOrFail($id);
+
+        $fuel->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil hapus',
+        ],200);
+    }
+
+    public function getDetailFuel($id){
+        $fuel = ItemFuel::where('id',$id)->first();
+        return response()->json([
+            'data' => $fuel
+        ],200);
+    }
 }

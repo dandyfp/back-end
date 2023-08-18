@@ -4,6 +4,9 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ItemFuelController;
 use App\Http\Controllers\OrderFuelController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionOrderController;
+use App\Http\Controllers\VehicleController;
+use App\Models\TransactionOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -27,6 +30,11 @@ Route::post('register',[AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('item-fuels',[ItemFuelController::class,'index']);
+    Route::delete('item-fuels-delete/{fuelId}',[ItemFuelController::class,'deleteFuel']);
+    Route::put('update-fuels/{fuelId}',[ItemFuelController::class,'updateFuel']);
+    Route::get('detail-fuel/{fuelId}',[ItemFuelController::class,'getDetailFuel']);
+
+
     Route::post('create-fuel',[ItemFuelController::class, 'createFuel']);
     Route::get('user',[AuthController::class, 'getUser']);
 
@@ -38,5 +46,14 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::post('create-transaction',[TransactionController::class, 'createTransaction']);
     Route::get('my-transaction',[TransactionController::class,'indexTransactions']);
+
+
+
+    Route::get('my-transaction-order/{idOrder}',[TransactionOrderController::class,'indexTransactionsOrder']);
+
+
+    Route::post('create-vehicle',[VehicleController::class,'createVehicle']);
+    Route::get('my-vehicle',[VehicleController::class,'getMyVehicle']);
+
 
 });

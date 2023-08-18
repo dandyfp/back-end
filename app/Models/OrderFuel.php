@@ -11,15 +11,18 @@ class OrderFuel extends Model
 
     protected $table = 'order_fuel';
 
+    protected $primaryKey = 'id';
+
     protected $guarded = [];
 
     public $incrementing = false;
 
-    public function orderFuels()
-{
-    return $this->hasMany(OrderFuel::class);
-}
-
+    public function transaction (){
+        return $this->belongsTo(TransactionOrder::class,'order_id','id');
+    }
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
     protected $hidden = [
        // 'created_at',

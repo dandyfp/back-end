@@ -6,25 +6,16 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemFuel extends Model
+class Vehicle extends Model
 {
     use HasFactory;
+    //use HasUuids;
 
+    protected $table = 'vehicle';
 
-    protected $table = 'item_fuels';
+    //protected $primaryKey = 'id';
 
-    protected $primarykey = 'id';
+    protected $guarded = [];
 
     public $incrementing = false;
-
-    protected $guarded = [
-
-    ];
-
-
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-    ];
-
 }
