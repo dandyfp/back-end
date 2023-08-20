@@ -61,6 +61,43 @@ class OrderFuelController extends Controller
 
     }
 
+    public function updateToOnDelivery(Request $request ){
+
+        $validator = Validator::make($request->all(),[
+            'status'=>'required',
+            'id'=>'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status'=>'error',
+                'message' => 'failed',
+                'data' => $validator->errors(),
+            ],500);
+        }
+
+        $data = OrderFuel::findOrFail($request->id);
+       // $order = $request->only('status');
+
+        //$data->update($order);
+        $data->update([
+            'status' => $request->status,
+        ]);
+
+
+        return response()->json([
+
+            'status' => 'success',
+            'message' =>'success update',
+        ]);
+
+
+
+
+
+
+    }
+
     public function indexMyOrder(){
 
         $user = auth()->user(); // Mendapatkan informasi pengguna yang sedang masuk
@@ -69,6 +106,41 @@ class OrderFuelController extends Controller
         //$myOrder = OrderFuel::all();
         return response()->json([
             'data' => $myOrder,
+        ]);
+
+    }
+
+    public function indexAllOrder(){
+
+        //$user = auth()->user(); // Mendapatkan informasi pengguna yang sedang masuk
+        //$myOrder = $user->orders; // Mengambil pesanan berdasarkan relasi
+
+        $myOrder = OrderFuel::all();
+        return response()->json([
+            'data' => $myOrder,
+        ]);
+
+    }
+
+    public function indexAllOrderReceived(){
+
+        $status = 'order received';
+        $order = OrderFuel::where('status',$status)->get();
+
+        return response()->json([
+            'data' => $order,
+        ]);
+
+    }
+
+    public function indexAllOrderOnProcess(){
+       // ['on delivery','on prosses']
+
+        $status = ['on prosses','on delivery',];
+        $order = OrderFuel::whereIn('status',$status)->get();
+
+        return response()->json([
+            'data' => $order,
         ]);
 
     }

@@ -69,4 +69,12 @@ class TransactionController extends Controller
             'data' => $myTransaction
         ]);
     }
+
+    public function indexAllTransaction(){
+
+        $transaction = Transaction::with('user')->get();
+        return response()->json([
+            'data' => $transaction
+        ]);
+    }
 }
