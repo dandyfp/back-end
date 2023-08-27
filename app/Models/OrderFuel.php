@@ -18,7 +18,7 @@ class OrderFuel extends Model
     public $incrementing = false;
 
     public function transaction (){
-        return $this->belongsTo(TransactionOrder::class,'order_id','id');
+        return $this->belongsTo(TransactionOrder::class);
     }
     public function user() {
         return $this->belongsTo(User::class);

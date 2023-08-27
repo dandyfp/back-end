@@ -13,6 +13,10 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function order() {
+        return $this->belongsTo(OrderFuel::class);
+    }
+
     protected $table = 'transaction';
 
     protected $guarded = [];
