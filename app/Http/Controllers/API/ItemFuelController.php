@@ -27,6 +27,7 @@ class ItemFuelController extends Controller
             'description' => 'required',
             'price' => 'required',
             'number_oktan' => 'required',
+            'stock' => 'required',
         ]);
 
         if($validator->fails()){
@@ -56,6 +57,7 @@ class ItemFuelController extends Controller
             'description' => 'required',
             'price' => 'required',
             'number_oktan' => 'required',
+            'stock' => 'required',
         ]);
         if($validator->fails()){
             return response()->json([
