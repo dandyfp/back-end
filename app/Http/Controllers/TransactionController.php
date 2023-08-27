@@ -77,4 +77,12 @@ class TransactionController extends Controller
             'data' => $transaction
         ]);
     }
+
+    public function indexTransactionFuel($idFuel){
+        $transaction = Transaction::where('id_fuel', $idFuel)->get();
+
+        return response()->json([
+            'data' => $transaction
+        ]);
+    }
 }

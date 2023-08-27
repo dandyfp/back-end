@@ -53,6 +53,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('create-transaction',[TransactionController::class, 'createTransaction']);
     Route::get('my-transaction',[TransactionController::class,'indexTransactions']);
     Route::get('all-transaction',[TransactionController::class,'indexAllTransaction']);
+    Route::get('all-transaction-fuel/{idFuel}',[TransactionController::class,'indexTransactionFuel']);
 
 
 
