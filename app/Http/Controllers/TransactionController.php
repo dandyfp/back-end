@@ -79,7 +79,7 @@ class TransactionController extends Controller
     }
 
     public function indexTransactionFuel($idFuel){
-        $transaction = Transaction::where('id_fuel', $idFuel)->get();
+        $transaction = Transaction::where('id_fuel', $idFuel)->with('user')->get();
 
         return response()->json([
             'data' => $transaction
