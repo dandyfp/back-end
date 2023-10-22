@@ -15,15 +15,16 @@ class OrderFuelController extends Controller
 
         $validator = Validator::make($request->all(),[
 
-            'name_order'=>'required',
-            'province'=>'required',
-            'subdistrict'=>'required',
-            'city'=>'required',
-            'detail_address'=>'required',
-            'payment_method'=>'required',
-            'status'=>'required',
-            'price'=>'required',
-            'liter'=>'required',
+            'name_order'=>'nullable',
+            'province'=>'nullable',
+            'subdistrict'=>'nullable',
+            'city'=>'nullable',
+            'detail_address'=>'nullable',
+            'payment_method'=>'nullable',
+            'status'=>'nullable',
+            'price'=>'nullable',
+            'liter'=>'nullable',
+            'telpon'=>'nullable',
 
         ]);
 
@@ -42,8 +43,8 @@ class OrderFuelController extends Controller
 
         $input = $request->all();
         $input['id'] = Str::uuid()->toString();
-        $input['name_fuel'] = $nameFuel->name;
-        $input['number_oktan']=$nameFuel->number_oktan;
+        $input['name_fuel'] = $nameFuel?->name;
+        $input['number_oktan']=$nameFuel?->number_oktan;
         $input['id_fuel'] = $idFuel;
         $input['user_id'] = $idUser;
         $input['shipping_cost'] = 5000;

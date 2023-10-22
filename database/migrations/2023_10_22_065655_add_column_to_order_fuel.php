@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_fuel', function (Blueprint $table) {
-            $table->uuid('id')->index();
+        Schema::table('order_fuel', function (Blueprint $table) {
+            /* $table->uuid('id')->index();
             $table->string('id_fuel')->unsigned()->nullable()->change();
             $table->string('name_order')->unsigned()->nullable()->change();
             $table->string('province')->unsigned()->nullable()->change();
@@ -24,7 +24,10 @@ return new class extends Migration
             $table->integer('price')->unsigned()->nullable()->change();
             $table->integer('liter')->unsigned()->nullable()->change();
             $table->string('telpon')->unsigned()->nullable()->change();
-            $table->timestamps();
+            $table->string('full_address')->unsigned()->nullable()->change();
+            $table->string('number_oktan')->unsigned()->nullable()->change();
+            $table->integer('shipping_cost')->unsigned()->nullable()->change();
+            $table->string("name_fuel")->unsigned()->nullable()->change(); */
         });
     }
 
@@ -33,6 +36,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_fuel');
+        Schema::table('order_fuel', function (Blueprint $table) {
+            //
+        });
     }
 };
