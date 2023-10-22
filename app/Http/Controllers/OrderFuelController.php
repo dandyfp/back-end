@@ -62,6 +62,38 @@ class OrderFuelController extends Controller
 
     }
 
+    public function updateOrder(Request $request, $id){
+        $order = OrderFuel::findOrFail($id);
+        $validator = Validator::make($request->all(),[
+            'name_order'=>'nullable',
+            'province'=>'nullable',
+            'subdistrict'=>'nullable',
+            'city'=>'nullable',
+            'detail_address'=>'nullable',
+            'payment_method'=>'nullable',
+            'status'=>'nullable',
+            'price'=>'nullable',
+            'liter'=>'nullable',
+            'telpon'=>'nullable',
+
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>'error',
+                'message' => 'failed',
+                'data' => $validator->errors(),
+            ],500);
+        }
+
+        $order->update($request->all());
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil',
+            'data' => $order,
+        ],200);
+    }
+
+
     public function updateToOnDelivery(Request $request ){
 
         $validator = Validator::make($request->all(),[
