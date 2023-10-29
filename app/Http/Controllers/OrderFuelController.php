@@ -85,6 +85,12 @@ class OrderFuelController extends Controller
             ],500);
         }
 
+        $idFuel = $request->query('id_fuel');
+        $nameFuel = ItemFuel::where('id',$idFuel)->first();
+        $input['name_fuel'] = $nameFuel?->name;
+        $input['number_oktan']=$nameFuel?->number_oktan;
+        $input['id_fuel'] = $idFuel;
+
         $order->update($request->all());
         return response()->json([
             'status' => 'success',
