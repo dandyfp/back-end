@@ -46,7 +46,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('my-order-on-processed',[OrderFuelController::class,'indexAllOrderOnProcess']);
     Route::put('update-status-order',[OrderFuelController::class,'updateToOnDelivery']);
     Route::get('all-order',[OrderFuelController::class,'indexAllOrder']);
-    Route::put('update-order/{orderId}',[OrderFuelController::class,'updateOrder']);
+    Route::put('update-order/{orderFuel}',[OrderFuelController::class,'updateOrder']);
 
 
 

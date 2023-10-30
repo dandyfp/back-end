@@ -62,8 +62,8 @@ class OrderFuelController extends Controller
 
     }
 
-    public function updateOrder(Request $request, $id){
-        $order = OrderFuel::findOrFail($id);
+    public function updateOrder(OrderFuel $orderFuel, Request $request){
+
         $validator = Validator::make($request->all(),[
             'name_order'=>'nullable',
             'province'=>'nullable',
@@ -89,13 +89,14 @@ class OrderFuelController extends Controller
         $nameFuel = ItemFuel::where('id',$idFuel)->first();
         $input['name_fuel'] = $nameFuel?->name;
         $input['number_oktan']=$nameFuel?->number_oktan;
+
         $input['id_fuel'] = $idFuel;
 
-        $order->update($request->all());
+        $orderFuel->update($request->all());
         return response()->json([
             'status' => 'success',
             'message' => 'Berhasil',
-            'data' => $order,
+            'data' => $orderFuel,
         ],200);
     }
 
